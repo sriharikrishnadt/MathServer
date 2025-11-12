@@ -1,0 +1,138 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Power of Lamp in Incandescent Bulb</title>
+
+  <style>
+    body {
+        font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+        background: {{ bg_color }};
+        transition: background 0.8s ease-in-out;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        height: 100vh;
+        margin: 0;
+    }
+
+
+    .container {
+      background: white;
+      border-radius: 12px;
+      box-shadow: 0 6px 18px rgba(0, 0, 0, 0.2);
+      padding: 30px 40px;
+      max-width: 500px;
+      width: 90%;
+    }
+
+    h1 {
+      text-align: center;
+      color: #222;
+      margin-bottom: 25px;
+      font-size: 1.5rem;
+      text-transform: uppercase;
+      letter-spacing: 1px;
+    }
+
+    form {
+      display: flex;
+      flex-direction: column;
+      gap: 15px;
+    }
+
+    label {
+      font-weight: 600;
+      color: #333;
+      margin-bottom: 5px;
+      display: block;
+    }
+
+    input[type="text"] {
+      width: 100%;
+      padding: 8px 10px;
+      font-size: 16px;
+      border-radius: 6px;
+      border: 1px solid #ccc;
+      box-sizing: border-box;
+    }
+
+    input[type="submit"] {
+      background-color: #3b82f6;
+      color: white;
+      border: none;
+      padding: 10px;
+      font-size: 16px;
+      border-radius: 6px;
+      cursor: pointer;
+      transition: background-color 0.3s ease;
+    }
+
+    input[type="submit"]:hover {
+      background-color: #2563eb;
+    }
+
+    .result {
+      background-color: #fff;
+      padding: 8px;
+      border-radius: 6px;
+      border: 1px solid #ccc;
+      text-align: center;
+      font-weight: bold;
+    }
+
+    .unit {
+      font-size: 0.9rem;
+      color: #555;
+      margin-left: 5px;
+    }
+
+    .error {
+      color: red;
+      text-align: center;
+      font-weight: bold;
+      margin-bottom: 10px;
+    }
+  </style>
+</head>
+
+<body>
+  <div class="container">
+    <h1>Power of Lamp in Incandescent Bulb</h1>
+
+    {% if error %}
+      <div class="error">{{ error }}</div>
+    {% endif %}
+
+    <form method="POST">
+      {% csrf_token %}
+
+      <div>
+        <label for="intensity">Intensity</label>
+        <input type="text" id="intensity" name="Intensity" value="{{ I }}" placeholder="Enter current in amperes" />
+        <span class="unit">(A)</span>
+      </div>
+
+      <div>
+        <label for="resistance">Resistance</label>
+        <input type="text" id="resistance" name="Resistance" value="{{ R }}" placeholder="Enter resistance in ohms" />
+        <span class="unit">(Ω)</span>
+      </div>
+
+      <div>
+        <input type="submit" value="Calculate" />
+      </div>
+
+      <div>
+        <label for="power">Power</label>
+        <input type="text" id="power" name="Power" value="{{ Power }}" readonly class="result" />
+        <span class="unit">W</span>
+      </div>
+    </form>
+  </div>
+</body>
+
+</html>
